@@ -1,5 +1,10 @@
 <template>
   <div class="background-from-random-image-page" :style="{'background': backgroundStyle}">
+    <div
+      :class="['background-image-bar', hoverIndex === i ? 'show' : '']"
+      v-for="(item,i) in colors"
+      :style="{'background': item}"
+    ></div>
     <div class="img-list" >
       <img
         :src="item"
@@ -25,13 +30,16 @@
     "https://picsum.photos/300/300?r=3",
     "https://picsum.photos/300/300?r=4"
   ]
+  const colors = ref([undefined, undefined, undefined, undefined]);
 
   const handleMouseEnter = async (img, index) => {
     hoverIndex.value = index;
-    const colors = await colorThief.getPalette(img, 3)
-    const [c1,c2,c3] = colors.map(c => `rgb(${c[0]},${c[1]},${c[2]})`);
-    backgroundStyle.value = `linear-gradient(to top, ${c1},${c2},${c3})`
-    console.log(backgroundStyle.value);
+    if (colors.value[index] === undefined) {
+      const cs = await colorThief.getPalette(img, 3)
+      const [c1,c2,c3] = cs.map(c => `rgb(${c[0]},${c[1]},${c[2]})`);
+      colors.value[index] = `linear-gradient(to top, ${c1},${c2},${c3})`;
+      console.log(colors.value[index]);
+    }
   }
   const handleMounseLeave = () => {
     hoverIndex.value = undefined;
@@ -46,7 +54,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-image 1s cubic-bezier(0.39, 0.575, 0.565, 1);
+  position: relative;
+  .background-image-bar{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    opacity: 0;
+    transition: all .3s cubic-bezier(0.39, 0.575, 0.565, 1);
+    &.show{
+      opacity: 1;
+    }
+  }
   .img-list{
     display: grid;
     grid-template-columns: repeat(2,1fr);
@@ -70,5 +91,21 @@
     }
   }
 }
-
+.gradient-box {
+  width: 300px;
+  height: 300px;
+  background-image: linear-gradient(90deg, red, blue);
+  animation: gradient-transition 5s infinite;
+}
+@keyframes gradient-transition {
+  0% {
+    background-image: linear-gradient(90deg, red, blue);
+  }
+  50% {
+    background-image: linear-gradient(90deg, blue, red);
+  }
+  100% {
+    background-image: linear-gradient(90deg, red, blue);
+  }
+}
 </style>
