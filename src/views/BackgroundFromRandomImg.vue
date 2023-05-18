@@ -5,15 +5,17 @@
       v-for="(item,i) in colors"
       :style="{'background': item}"
     ></div>
-    <div class="img-list" >
-      <img
-        :src="item"
-        :class="hoverIndex !== undefined ? hoverIndex === i ? 'active' : 'op' : ''"
-        v-for="(item, i) in images"
-        @mouseenter="handleMouseEnter($event.target, i)"
-        @mouseleave="handleMounseLeave"
-        crossorigin="anonymous"
-      />
+    <div class="img-list-container">
+      <div class="img-list" >
+        <img
+          :src="item"
+          :class="hoverIndex !== undefined ? hoverIndex === i ? 'active' : 'op' : ''"
+          v-for="(item, i) in images"
+          @mouseenter="handleMouseEnter($event.target, i)"
+          @mouseleave="handleMounseLeave"
+          crossorigin="anonymous"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -37,13 +39,13 @@
     if (colors.value[index] === undefined) {
       const cs = await colorThief.getPalette(img, 3)
       const [c1,c2,c3] = cs.map(c => `rgb(${c[0]},${c[1]},${c[2]})`);
-      colors.value[index] = `linear-gradient(to top, ${c1},${c2},${c3})`;
+      colors.value[index] = `linear-gradient(${c1},${c2},${c3})`;
       console.log(colors.value[index]);
     }
   }
   const handleMounseLeave = () => {
-    hoverIndex.value = undefined;
-    // backgroundStyle.value = 'linear-gradient(to top, #fff,#fff,#fff)';
+    // hoverIndex.value = undefined;
+    // backgroundStyle.value = 'linear-gradient(#fff,#fff,#fff)';
   }
 
 
@@ -67,6 +69,14 @@
     &.show{
       opacity: 1;
     }
+  }
+  .img-list-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(100px);
   }
   .img-list{
     display: grid;
