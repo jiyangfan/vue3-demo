@@ -1,23 +1,10 @@
-<!--<template>-->
-<!--  <div class="about">-->
-<!--    <h1>This is an about page</h1>-->
-<!--  </div>-->
-<!--  {{ demoHtml }}-->
-<!--</template>-->
+<template>
+  <div class="about">
+    <h1>This is an about page</h1>
+  </div>
+</template>
 
-<script lang="jsx">
-  import {demoHtml, demo2Html, demoFunc} from "./demo";
-  export default {
-    data () {
-
-    },
-    render () {
-      return <div>123{demoHtml}{demo2Html}{demoFunc}</div>
-    },
-    methods: {
-
-    }
-  }
+<script lang="typescript">
 </script>
 
 <style>

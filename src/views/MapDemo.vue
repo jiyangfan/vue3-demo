@@ -7,7 +7,7 @@
     <button className="btn" @click="getAllPolygon">查看所有多边形</button>
   </div>
 </template>
-<script>
+<script lang="ts">
 import AMapLoader from '@amap/amap-jsapi-loader';
 import { shallowRef } from '@vue/reactivity';
 import { nanoid } from 'nanoid';
