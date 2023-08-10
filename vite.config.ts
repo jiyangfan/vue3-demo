@@ -12,8 +12,8 @@ export default defineConfig({
     vueJsx(),
     viteCompression({
       threshold: 10240,
-      // algorithm: 'brotliCompress'
-      // deleteOriginFile: true
+      // algorithm: 'brotliCompress', // 压缩方式，默认gzip
+      // deleteOriginFile: true, // 压缩后删除原文件
     })
   ],
   resolve: {

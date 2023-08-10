@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
 import HelloWorld from "./components/HelloWorld.vue";
+import './public-path';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { DndProvider } from 'vue3-dnd';
+
+
 </script>
 
 <template>
@@ -9,14 +14,21 @@ import HelloWorld from "./components/HelloWorld.vue";
       <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/MapDemo">高德地图DEMO</RouterLink>
+        <RouterLink to="/MapDemo2">高德地图DEMO2</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/BackgroundFromRandomImg">根据随机图片设置对应颜色背景图</RouterLink>
         <RouterLink to="/ImageLazyLoad">图片懒加载</RouterLink>
+        <RouterLink to="/Form">表单</RouterLink>
+        <RouterLink to="/Vue3Dnd">Vue3Dnd</RouterLink>
       </nav>
     </div>
   </header>
+  <div class="main-container">
 
-  <RouterView />
+    <DndProvider :backend="HTML5Backend">
+      <RouterView />
+    </DndProvider>
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -61,5 +73,13 @@ import HelloWorld from "./components/HelloWorld.vue";
     border: 0;
   }
 
+  .main-container{
+    display: flex;
+    flex: 1;
+    height: 100%;
+    flex-direction: column;
+    overflow: hidden;
+    margin-left: 10px;
+  }
 
 </style>
