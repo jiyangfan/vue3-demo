@@ -15,6 +15,7 @@ import { DndProvider } from 'vue3-dnd';
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/MapDemo">高德地图DEMO</RouterLink>
         <RouterLink to="/MapDemo2">高德地图DEMO2</RouterLink>
+        <RouterLink to="/MapChart">地图图表</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/BackgroundFromRandomImg">根据随机图片设置对应颜色背景图</RouterLink>
         <RouterLink to="/ImageLazyLoad">图片懒加载</RouterLink>

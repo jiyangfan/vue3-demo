@@ -42,6 +42,7 @@ const initMap = () => {
     AMapLoader.load({
       key: '6b12d6c98e3b1d5a5e1f6d961951cc69',             // 申请好的Web端开发者Key，首次调用 load 时必填
       version: "2.0",      // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
+      // version: "2.1Beta",      // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
       plugins: [
         // 'AMap.GLCustomLayer', // 自定义图层
         // 'AMap.GltfLoader', // three.js 3d
@@ -58,6 +59,7 @@ const initMap = () => {
 
       map = new AMap.Map("home-map-container", {  //设置地图容器id
         viewMode: "3D",    //是否为3D地图模式
+        terrain: true, // 展示3D地形
         zoom: 10.5,           //初始化地图级别
         zooms: [10.5, 30],
         center: [121.577119, 31.637838], //初始化地图中心点位置
@@ -137,7 +139,7 @@ const initMap = () => {
         let polyphy = new AMap.Polygon({
           path: area.path,
           extrusionHeight: 100 * area.health / 100,
-          // height: 2000,
+          height: 200,
           roofColor: [0, 136, 255, 0.5],
           wallColor: [0, 136, 255, 0.5],
           zIndex: 120,
@@ -193,10 +195,12 @@ const initMap = () => {
       // new AMap.Polyline({
       //   path: mask,
       //   strokeColor: '#99ffff',
-      //   strokeWeight: 10,
+      //   strokeWeight: 5,
       //   map: map
       // })
 
+
+      // 添加边界垂面
 
 
       // initGllayer();
@@ -346,11 +350,18 @@ onMounted(() => {
 </script>
 
 
-<style scoped>
+<style scoped lang="scss">
   #home-map-container{
     padding:0px;
     margin: 0px;
     width: 100%;
     height: 800px;
   }
+
+</style>
+<style>
+.amap-logo, .amap-copyright{
+  display: none !important;
+
+}
 </style>
