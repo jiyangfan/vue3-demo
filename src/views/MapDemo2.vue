@@ -58,9 +58,9 @@ const initMap = () => {
 
 
       map = new AMap.Map("home-map-container", {  //设置地图容器id
-        viewMode: "3D",    //是否为3D地图模式
-        terrain: true, // 展示3D地形
-        zoom: 10.5,           //初始化地图级别
+        viewMode: "3D",  //是否为3D地图模式
+        terrain: true, // 地图是否展示地形，此属性适用于 3D 地图。默认为值 false 不展示地形，可选 true ，选择 true 会展示地形效果。(注意：此属性适用于 JSAPI v2.1Beta 及以上版本)。
+        zoom: 10.5, //初始化地图级别
         zooms: [10.5, 30],
         center: [121.577119, 31.637838], //初始化地图中心点位置
         pitch: 50,
@@ -70,8 +70,18 @@ const initMap = () => {
         mask: [mask],
         showBuildingBlock: false,
         showLabel: false,
+        features: ['bg','point','road','building'], // 设置地图上显示的元素种类, 支持'bg'（地图背景）、'point'（POI点）、'road'（道路）、'building'（建筑物）
 
       });
+
+      // 设置最大显示区域
+      const bounds = map.getBounds();
+      bounds.northEast.lat += .14;
+      bounds.northEast.lng += .8;
+      bounds.southWest.lat -= .14;
+      bounds.southWest.lng -= .8;
+      console.log(bounds);
+      map.setLimitBounds(bounds);
 
       // 根据缩放等级设置卫星图显示
       // map.on("zoomend", () => {
@@ -192,18 +202,16 @@ const initMap = () => {
 
 
       //添加描边
-      // new AMap.Polyline({
-      //   path: mask,
-      //   strokeColor: '#99ffff',
-      //   strokeWeight: 5,
-      //   map: map
-      // })
+      new AMap.Polyline({
+        path: mask,
+        strokeColor: '#99ffff',
+        strokeWeight: 5,
+        map: map
+      })
 
+      // 添加树模型
+      initGllayer();
 
-      // 添加边界垂面
-
-
-      // initGllayer();
       resolve(true);
 
     }).catch(e => {
@@ -217,9 +225,9 @@ const initMap = () => {
 const initGllayer = () => {
   customCoords = map.customCoords;
   data = customCoords.lngLatsToCoords([
-    [116.56, 39.79],
-    [121.420826,31.773698],
-    [116.56, 39.79],
+    [121.479221,31.67466],
+    [121.492286,31.690329],
+    [121.499221,31.67466],
   ]);
   console.log('========== data', data);
   // 创建 GL 图层
@@ -256,7 +264,7 @@ const initGllayer = () => {
       loader.load('/src/assets/2.gltf', (gltf: THREE.GLTf) => {
 
         gltf.scene.position.set(data[1][0], data[1][1]);
-        gltf.scene.scale.set(2, 2, 2);
+        gltf.scene.scale.set(10, 10, 10);
         gltf.scene.rotation.x = 0.5 * Math.PI;
         gltf.scene.position.z = 0.8;
 
@@ -298,7 +306,7 @@ const initGllayer = () => {
       renderer.resetState();
       // 重新设置图层的渲染中心点，将模型等物体的渲染中心点重置
       // 否则和 LOCA 可视化等多个图层能力使用的时候会出现物体位置偏移的问题
-      customCoords.setCenter([121.420826,31.773698]);
+      customCoords.setCenter([121.479221,31.67466]);
       var { near, far, fov, up, lookAt, position } = customCoords.getCameraParams();
 
       // 2D 地图下使用的正交相机
