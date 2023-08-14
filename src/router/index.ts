@@ -24,7 +24,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("../views/MapDemo.vue"),
+      component: () => import("../views/amap/MapDemo.vue"),
     },
     {
       path: "/MapDemo2",
@@ -32,7 +32,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("../views/MapDemo2.vue"),
+      component: () => import("../views/amap/MapDemo2.vue"),
     },
     {
       path: "/MapChart",

@@ -11,8 +11,8 @@
 import AMapLoader from '@amap/amap-jsapi-loader';
 import { shallowRef } from '@vue/reactivity';
 import { nanoid } from 'nanoid';
-import polygonItem from "./PolygonItem";
-import PolygonMap from "./PolygonMap";
+import polygonItem from "../PolygonItem";
+import PolygonMap from "../PolygonMap";
 
 export default {
   name: 'MapDemo',

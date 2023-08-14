@@ -9,8 +9,8 @@
 import AMapLoader from '@amap/amap-jsapi-loader';
 import { shallowRef } from '@vue/reactivity';
 import { nanoid } from 'nanoid';
-import polygonItem from "./PolygonItem";
-import PolygonMap from "./PolygonMap";
+import polygonItem from "../PolygonItem";
+import PolygonMap from "../PolygonMap";
 import * as THREE from "three";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import {onMounted} from "vue";
@@ -128,7 +128,9 @@ const initMap = () => {
         offset: [0, -25],
         style: {
           'padding': '5px 10px',
-          'margin-bottom': '1rem',
+          // 'margin-bottom': '2rem',
+          'positoin': 'absolute',
+          'top': '-30px',
           'border-radius': '.25rem',
           'background-color': 'rgba(0,0,0,0.5)',
           // 'width': '12rem',
@@ -162,13 +164,15 @@ const initMap = () => {
           extData: area,
 
         })
-        polyphy.on('mouseover', (event) => {
+        // polyphy.on('mouseover', (event) => {
+        polyphy.on('mousemove', (event) => {
           text.show();
           var extData = polyphy.getOptions().extData;
+          const area = Math.round(AMap.GeometryUtil.ringArea(polyphy.getOptions().path));
           // var health = pickItem.properties.health;
           // var v = pickItem.properties.health * 100;
-          text.setText(extData.name + ` 健康度：${extData.health} %`);
-          text.setPosition(event.lnglat);
+          text.setText( `<p class="area-text">${extData.name} </br>健康度：${extData.health} % </br>占地面积：${area} 平方米</p>`);
+          text.setPosition([event.lnglat.lng, event.lnglat.lat + 0.001]);
 
           for (const curpoly of listpoly) {
             if (curpoly === polyphy) {
@@ -188,6 +192,7 @@ const initMap = () => {
         })
         // polyphy.on('mouseout', (event) => {
         //   console.log('mouseout', event);
+        //   text.hide();
         //   polyphy.setOptions({
         //     roofColor: [0, 136, 255, 0.5],
         //     wallColor: [0, 136, 255, 0.5],
@@ -221,7 +226,12 @@ const initMap = () => {
   })
 }
 
-// 加载树模型
+/**
+ * 加载树模型
+ * @author JiYangFan (worldstss@gmail.com)
+ * @licence Apache 2.0
+ * @return void
+ */
 const initGllayer = () => {
   customCoords = map.customCoords;
   data = customCoords.lngLatsToCoords([
@@ -371,5 +381,8 @@ onMounted(() => {
 .amap-logo, .amap-copyright{
   display: none !important;
 
+}
+.area-text{
+  text-align: left;
 }
 </style>
