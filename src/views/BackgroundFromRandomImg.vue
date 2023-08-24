@@ -5,6 +5,14 @@
       v-for="(item,i) in colors"
       :style="{'background': item}"
     ></div>
+<!--    <div-->
+<!--      :class="['background-image-bar', 'show']"-->
+<!--      :style="{-->
+<!--      '&#45;&#45;startColor': startColor,-->
+<!--      '&#45;&#45;centerColor': centerColor,-->
+<!--      '&#45;&#45;endColor': endColor,-->
+<!--    }"-->
+<!--    ></div>-->
     <div class="img-list-container">
       <div class="img-list" >
         <img
@@ -33,7 +41,15 @@
     "https://picsum.photos/300/300?r=4"
   ]
   const colors = ref([undefined, undefined, undefined, undefined]);
+  const startColor = ref('');
+  const centerColor = ref('');
+  const endColor = ref('');
 
+  /**
+   * 通过不同DIV实现过滤动画
+   * @param img
+   * @param index
+   */
   const handleMouseEnter = async (img, index) => {
     hoverIndex.value = index;
     if (colors.value[index] === undefined) {
@@ -43,14 +59,42 @@
       console.log(colors.value[index]);
     }
   }
+
+  /**
+   * 直接改变CSS变量设置linear-gradient无法实现渐变颜色的s过渡动画
+   * @param img
+   * @param index
+   */
+  const handleMouseEnter2 = async (img, index) => {
+    hoverIndex.value = index;
+    if (colors.value[index] === undefined) {
+      const cs = await colorThief.getPalette(img, 3)
+      const [c1,c2,c3] = cs.map(c => `rgb(${c[0]},${c[1]},${c[2]})`);
+      startColor.value = c1;
+      centerColor.value = c2;
+      endColor.value = c3;
+    }
+  }
+
   const handleMounseLeave = () => {
     // hoverIndex.value = undefined;
     // backgroundStyle.value = 'linear-gradient(#fff,#fff,#fff)';
   }
 
-
 </script>
 <style scoped lang="scss">
+@property --startColor {
+  syntax: '<color>';
+  inherits: false;
+}
+@property --centerColor {
+  syntax: '<color>';
+  inherits: false;
+}
+@property --endColor {
+  syntax: '<color>';
+  inherits: false;
+}
 .background-from-random-image-page{
   width: 100%;
   display: flex;
@@ -66,10 +110,13 @@
     z-index: 0;
     opacity: 0;
     transition: all .3s cubic-bezier(0.39, 0.575, 0.565, 1);
+    //transition: --startColor .3s cubic-bezier(0.39, 0.575, 0.565, 1), --centerColor .3s cubic-bezier(0.39, 0.575, 0.565, 1), --endColor .3s cubic-bezier(0.39, 0.575, 0.565, 1) ;
+    //background: linear-gradient(var(--startColor), var(--centerColor), var(--endColor));
     &.show{
       opacity: 1;
     }
   }
+
   .img-list-container{
     width: 100%;
     height: 100%;
