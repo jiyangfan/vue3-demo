@@ -16,6 +16,7 @@
     "@types/three": "^0.155.0",
     "@vueuse/core": "^10.2.1",
     "colorthief": "^2.4.0",
+    "element-plus": "^2.3.12",
     "nanoid": "^4.0.1",
     "pinia": "^2.0.28",
     "react-dnd-html5-backend": "^16.0.1",

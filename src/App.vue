@@ -21,6 +21,7 @@ import { DndProvider } from 'vue3-dnd';
         <RouterLink to="/ImageLazyLoad">图片懒加载</RouterLink>
         <RouterLink to="/Form">表单</RouterLink>
         <RouterLink to="/Vue3Dnd">Vue3Dnd</RouterLink>
+        <RouterLink to="/ElementComp">ElementComp</RouterLink>
       </nav>
     </div>
   </header>

@@ -16,7 +16,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("../views/AboutView.vue"),
+      component: () => import("@/views/AboutView.vue"),
     },
     {
       path: "/MapDemo",
@@ -24,7 +24,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("../views/amap/MapDemo.vue"),
+      component: () => import("@/views/amap/MapDemo.vue"),
     },
     {
       path: "/MapDemo2",
@@ -32,7 +32,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("../views/amap/MapDemo2.vue"),
+      component: () => import("@/views/amap/MapDemo2.vue"),
     },
     {
       path: "/MapChart",
@@ -40,7 +40,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("../views/MapChart.vue"),
+      component: () => import("@/views/MapChart.vue"),
     },
     {
       path: "/BackgroundFromRandomImg",
@@ -48,7 +48,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("../views/BackgroundFromRandomImg.vue"),
+      component: () => import("@/views/BackgroundFromRandomImg.vue"),
     },
     {
       path: "/ImageLazyLoad",
@@ -56,7 +56,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("../views/ImageLazyLoad/ImageLazyLoad.vue"),
+      component: () => import("@/views/ImageLazyLoad/ImageLazyLoad.vue"),
     },
     {
       path: "/Form",
@@ -64,7 +64,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("../views/Form/Form.vue"),
+      component: () => import("@/views/Form/Form.vue"),
     },
     {
       path: "/Vue3Dnd",
@@ -72,7 +72,15 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import("../views/Vue3Dnd/Container.vue"),
+      component: () => import("@/views/Vue3Dnd/Container.vue"),
+    },
+    {
+      path: "/ElementComp",
+      name: "ElementComp",
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import("@/views/ElementComp/ElementComp.vue"),
     },
 
   ],
