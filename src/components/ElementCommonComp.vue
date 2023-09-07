@@ -3,11 +3,16 @@
     <slot></slot>
   </component>
 </template>
-<script setup>
+<script setup lang="ts">
+import type {PropType} from "vue";
+
+type Mode = String
+
 const props = defineProps({
   mode: {
-    type: String,
-    default: 'button'
+    type: String as PropType<Mode>,
+    default: 'button',
+
   }
 })
 </script>
